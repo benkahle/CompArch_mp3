@@ -3,8 +3,8 @@ main:
   #add $sp, $sp, -8 # Save initial state
   #sw $ra, 4($sp)
   #sw $a0, 0($sp)
-  add $v0, $zero, $zero
-  add $a0, $zero, 5 # Call fibonacci(4)
+  li $v0, 0
+  add $a0, $zero, 7 # Call fibonacci(4)
   jal fibonacci
   add $t0, $zero, $v0 # save return value in $t0
   #add $a0, $zero, 10 # Call fibonacci(10)
@@ -34,8 +34,8 @@ fibonacci:
   lw $ra, 8($sp)
   lw $a0, 4($sp)
   lw $t0, 0($sp)
-  add $v0, $t0, $v0
   sw $v0, 0($sp)
+  add $v0, $t0, $v0
   #add $sp, $sp, 12
   
   add $a0, $a0, -2 #call Fib_1
@@ -44,8 +44,8 @@ fibonacci:
   lw $ra, 8($sp)
   lw $a0, 4($sp)
   lw $t0, 0($sp)
-  add $v0, $t0, $v0 # Sum Fib_1 and Fib_2 and return the sum
   sw $v0, 0($sp)
+  add $v0, $t0, $v0 # Sum Fib_1 and Fib_2 and return the sum
   add $sp, $sp, 12
  
   jr $ra
