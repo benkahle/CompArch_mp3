@@ -1,0 +1,12 @@
+add immediate
+store word
+jump and link
+load word
+add
+add immediate unsigned
+set if less than immediate
+branch if not equal
+jump tp return address
+branch if equal
+
+
