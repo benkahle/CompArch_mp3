@@ -80,7 +80,7 @@ module decoder1to32(out, enable, address);
  
   assign out = enable<<address; 
 endmodule
-module regfile(ReadData1, // Contents of first register read
+module registerFile(ReadData1, // Contents of first register read
  		ReadData2, // Contents of second register read
  		WriteData, // Contents to write to register
  		ReadRegister1, // Address of first register to read 
@@ -115,7 +115,7 @@ module regfile(ReadData1, // Contents of first register read
 
   //assign ReadData1 = 42;
   //assign ReadData2 = 42;
-endmodule
+endmodule
 module hw4testbenchharness;
   wire[31:0]	ReadData1;
   wire[31:0]	ReadData2;
@@ -128,7 +128,7 @@ module hw4testbenchharness;
   reg		begintest;
 
   // The register file being tested.  DUT = Device Under Test
-  regfile DUT(ReadData1,
+  registerFile DUT(ReadData1,
 		ReadData2,
 		WriteData, 
 		ReadRegister1, 
