@@ -8,7 +8,7 @@ reg [31:0] mem[1023:0];
 always @(posedge clk)
  if (regWE) mem[Addr] <= DataIn;
 
-assign DataOut = mem[Addr];
+  assign DataOut = mem[Addr];
 endmodule
 
 
