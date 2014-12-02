@@ -8,7 +8,7 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
   output regDst, regWrEn, memWrEn, aluSrcB, extSel;
 
   always @(posedge clk)
-    //Check Opcode to determine instruction type
+    // Set defaults
     rs = 5'd0;
     rt = 5'd0;
     rd = 5'd0;
@@ -26,6 +26,7 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
     rd = instruction[15:11];
     imm = instruction[15:0];
 
+    //Check Opcode to determine instruction type
     case(instruction[31:26])
       6'b000000: begin // R-Type instruction
         case(instruction[5:0]) //Check Funct to determine operation
