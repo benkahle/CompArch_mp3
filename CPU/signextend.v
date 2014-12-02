@@ -30,21 +30,40 @@ module testsignextend;
 	extend = 0;
         #100; // 100 ns for global reset 
 
-        extend = -30;
+        extend = -8;
         clk = 1;
         #100;
         clk = 0;
 	$display("Test Cases:");
-	$display("16-bit input 1: %b", extend);
-	$display("32-bit output 1: %b", extended);
+	$display("16-bit input -d8: %b", extend);
+	$display("32-bit output -d8: %b", extended);
 	$display("");
 	#100;
-	extend = 40;
+	
+	extend = -30;
+	clk = 1;
+	#100;
+	clk = 0;
+	$display("16-bit input -d30: %b", extend);
+	$display("32-bit output -d30: %b", extended);
+	$display("");
+	#100
+
+	extend = 7;
+	clk = 1;
+	#100;
+	clk = 0;
+	$display("16-bit input d7: %b", extend);
+	$display("32-bit output d7: %b", extended);
+	$display("");
+	#100
+
+	extend = 32768;
         clk = 1;
         #100;
         clk = 0;
-	$display("16-bit input 2: %b", extend);
-	$display("32-bit output 2: %b", extended);
+	$display("16-bit input d32768: %b", extend);
+	$display("32-bit output d32768: %b", extended);
 
     end
 
