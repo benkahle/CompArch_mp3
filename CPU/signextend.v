@@ -1,14 +1,14 @@
 module signextend( clk, extend, extended );
 //Extends an 8 bit input to a 32 bit output
-input[7:0] extend;
+input[15:0] extend;
 input clk;
 output[31:0] extended;
 
 reg[31:0] extended;
-wire[7:0] extend;
+wire[15:0] extend;
 
 always @( posedge clk ) begin
-    extended[31:0] <= { {24{extend[7]}}, extend[7:0] };
+    extended[31:0] <= { {16{extend[15]}}, extend[15:0] };
 end
 
 endmodule
@@ -17,7 +17,7 @@ endmodule
 
 module testsignextend;
 
-    reg [7:0] extend;
+    reg [15:0] extend;
     reg clk;
 
     wire [31:0] extended;
@@ -34,16 +34,17 @@ module testsignextend;
         clk = 1;
         #100;
         clk = 0;
-	
-	$display("Input 1: %b", extend);
-	$display("Extended output 1: %b", extended);
+	$display("Test Cases:");
+	$display("16-bit input 1: %b", extend);
+	$display("32-bit output 1: %b", extended);
+	$display("");
 	#100;
 	extend = 40;
         clk = 1;
         #100;
         clk = 0;
-	$display("Input 2: %b", extend);
-	$display("Extended output 2: %b", extended);
+	$display("16-bit input 2: %b", extend);
+	$display("32-bit output 2: %b", extended);
 
     end
 
