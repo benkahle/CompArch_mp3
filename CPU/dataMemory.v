@@ -4,12 +4,13 @@ module dataMemory(clk, regWE, addr, dataIn, dataOut);
   input[31:0] dataIn;
   output[31:0] dataOut;
   reg[31:0] mem[1023:0];
+
   always @(posedge clk) begin
     if (regWE) begin
       mem[addr] <= dataIn;
-      dataOut = mem[addr];
     end
   end
+  assign dataOut = mem[addr];
 endmodule
 module testBenchHarness;
   wire clk, regWE;
@@ -19,20 +20,20 @@ module testBenchHarness;
   reg beginTest;
 
   dataMemory memTest(clk, regWE, addr, dataIn, dataOut);
-  testBench test(clk, beginTest);
+  testBench test(clk, beginTest, regWE, addr, dataIn, dataOut);
 
   initial begin
     beginTest = 0;
-    #10
+    #10;
     beginTest = 1;
-    #100
+    #100;
   end
 endmodule
 module testBench(clk, beginTest, regWE, addr, dataIn, dataOut);
   output reg clk;
   output reg regWE;
-  output[9:0] addr;
-  output[31:0] dataIn;
+  output reg[9:0] addr;
+  output reg[31:0] dataIn;
   input[31:0] dataOut;
   input beginTest;
 
@@ -41,15 +42,14 @@ module testBench(clk, beginTest, regWE, addr, dataIn, dataOut);
     regWE = 0;
     addr = 0;
     dataIn = 0;
-    dataOut = 0;
   end
   always @(posedge beginTest) begin
-    #10
+    #10;
     
     //test case 1
     #5 clk=1; #5 clk=0;
     regWE = 0;
-    addr = 10'd0; 
+    addr = 10'd1; 
     dataIn = 32'd1;
     if(dataOut == dataIn) begin
       $display("dataMemory failure: data present when regWE = 0");

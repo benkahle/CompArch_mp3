@@ -1,4 +1,4 @@
-module instructionmemory(clk, Addr, DataOut);
+module instructionMemory(clk, regWE, Addr, DataIn, DataOut);
  input clk, regWE;
  input[9:0] Addr;
  input[31:0] DataIn;
@@ -10,5 +10,5 @@ always @(posedge clk)
   assign DataOut = mem[Addr];
 endmodule
 
-module instructionmemorytest();
+module instructionMemoryTest();
 endmodule
