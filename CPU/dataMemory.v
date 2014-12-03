@@ -26,7 +26,7 @@ module testBenchHarness;
     beginTest = 0;
     #10;
     beginTest = 1;
-    #100;
+    #300;
   end
 endmodule
 module testBench(clk, beginTest, regWE, addr, dataIn, dataOut);
@@ -46,13 +46,35 @@ module testBench(clk, beginTest, regWE, addr, dataIn, dataOut);
   always @(posedge beginTest) begin
     #10;
     
-    //test case 1
+    //test case 1: make sure data not written when regWE = 0
     #5 clk=1; #5 clk=0;
     regWE = 0;
     addr = 10'd1; 
     dataIn = 32'd1;
     if(dataOut == dataIn) begin
       $display("dataMemory failure: data present when regWE = 0");
+    end
+
+    //#100;
+
+    //test case 2
+    #5 clk=1; #5 clk=0;
+    regWE = 1;
+    addr = 10'd1; 
+    dataIn = 32'd1;
+    if(dataOut != dataIn) begin
+      $display("dataMemory failure: data not present when regWE = 1");
+    end
+
+    //#100
+
+    //test case 3
+    #5 clk=1; #5 clk=0;
+    regWE = 1;
+    addr = 10'd1; 
+    dataIn = 32'd1;
+    if(dataOut == dataIn[10'd0]) begin
+      $display("dataMemory failure: data present in empty address");
     end
   end
 endmodule
