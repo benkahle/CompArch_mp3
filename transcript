@@ -1,1 +1,161 @@
 # Reading C:/Modeltech_pe_edu_10.3c/tcl/vsim/pref.tcl
+cd /c:/Users/rspring
+# couldn't change working directory to "/c:/Users/rspring": no such file or directory
+cd c:
+pwd
+# C:/Users/rspring/CompArch_mp3
+ls
+# CPU
+# block_diagram1.JPG
+# block_diagram2.JPG
+# fibonacci.asm
+# hexcode.dat
+# inst_list.txt
+# mp3_stack.eps
+# transcript
+vlib work
+vmap work work
+# Model Technology ModelSim PE vmap 10.3c Lib Mapping Utility 2014.07 Jul 19 2014
+# vmap -modelsim_quiet work work 
+# Copying c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+clear
+# couldn't execute "C:\Program Files (x86)\Git\bin\clear": no such file or directory
+pwd
+# C:/Users/rspring/CompArch_mp3
+cd CPU
+# reading c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini
+
+ls
+# ALU
+# alu.do
+# cpu.do
+# cpu.v
+# dataMemory
+# dataMemory.bak
+# dataMemory.v
+# datamemory.v.bak
+# instructionDecoder.v
+# instructionmemory.v
+# registerFile.v
+# signextend.do
+# signextend.v
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:07:47 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# ** Error: (vlog-19) Failed to access library 'work' at "work".
+# 
+# No such file or directory. (errno = ENOENT)
+# End time: 19:08:08 on Dec 02,2014, Elapsed time: 0:00:21
+# Errors: 1, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
+ls
+# ALU
+# alu.do
+# cpu.do
+# cpu.v
+# dataMemory
+# dataMemory.bak
+# dataMemory.v
+# datamemory.v.bak
+# instructionDecoder.v
+# instructionmemory.v
+# registerFile.v
+# signextend.do
+# signextend.v
+vlib work
+vmap work work
+# Model Technology ModelSim PE vmap 10.3c Lib Mapping Utility 2014.07 Jul 19 2014
+# vmap -modelsim_quiet work work 
+# Copying c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:08:45 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# -- Compiling module dataMemory
+# -- Compiling module testBenchHarness
+# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
+# ** Error: dataMemory.v(45): (vlog-2730) Undefined variable: 'begintest'.
+# 
+# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
+# End time: 19:09:07 on Dec 02,2014, Elapsed time: 0:00:22
+# Errors: 3, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:25:54 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# -- Compiling module dataMemory
+# -- Compiling module testBenchHarness
+# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
+# ** Error: dataMemory.v(46): (vlog-2730) Undefined variable: 'begintest'.
+# 
+# ** Error: dataMemory.v(57): near "endmodule": syntax error, unexpected endmodule
+# End time: 19:26:16 on Dec 02,2014, Elapsed time: 0:00:22
+# Errors: 3, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:28:51 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# -- Compiling module dataMemory
+# -- Compiling module testBenchHarness
+# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
+# ** Error: dataMemory.v(45): (vlog-2730) Undefined variable: 'begintest'.
+# 
+# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
+# End time: 19:29:13 on Dec 02,2014, Elapsed time: 0:00:22
+# Errors: 3, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:29:31 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# -- Compiling module dataMemory
+# -- Compiling module testBenchHarness
+# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
+# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
+# End time: 19:29:31 on Dec 02,2014, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
+do dataMemory
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 19:30:13 on Dec 02,2014
+# vlog -reportprogress 300 -work work dataMemory.v 
+# -- Compiling module dataMemory
+# -- Compiling module testBenchHarness
+# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
+# ** Error: dataMemory.v(57): near "endmodule": syntax error, unexpected endmodule
+# End time: 19:30:35 on Dec 02,2014, Elapsed time: 0:00:22
+# Errors: 2, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./dataMemory line 1
+# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+#     while executing
+# "vlog -reportprogress 300 -work work dataMemory.v"
