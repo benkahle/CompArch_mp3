@@ -3,20 +3,20 @@ module dataMemory(clk, regWrEn, addr, dataIn, dataOut);
   input[31:0] addr;
   input[31:0] dataIn;
   output[31:0] dataOut;
-  reg[31:0] mem[1023:0];
+  reg[31:0] mem[3999:0];
 
   always @(posedge clk) begin
     if (regWrEn) begin
-      mem[addr] <= dataIn;
+      mem[addr/4] <= dataIn;
     end
   end
-  assign dataOut = mem[addr];
+  assign dataOut = mem[addr/4];
 endmodule
 
 module testBench;
   reg clk;
   reg regWrEn;
-  reg[9:0] addr;
+  reg[31:0] addr;
   reg[31:0] dataIn;
   wire[31:0] dataOut;
   reg failed;
@@ -32,7 +32,7 @@ module testBench;
 
     //test case 1: make sure data not written when regWrEn = 0
     regWrEn = 0;
-    addr = 10'd1; 
+    addr = 32'd0; 
     dataIn = 32'd1;
     #5 clk=1; #5 clk=0;
     if(dataOut == dataIn) begin
@@ -42,7 +42,7 @@ module testBench;
 
     //test case 2
     regWrEn = 1;
-    addr = 10'd1; 
+    addr = 32'd4; 
     dataIn = 32'd1;
     #5 clk=1; #5 clk=0;
     if(dataOut != dataIn) begin
@@ -52,11 +52,11 @@ module testBench;
 
     //test case 3
     regWrEn = 0;
-    addr = 10'd2; 
+    addr = 32'd8; 
     #5 clk=1; #5 clk=0;
     if(dataOut != 32'd0) begin
       failed = 1;
-      $display("dataMemory failure: data present in empty address");
+      $display("dataMemory failure: data (%h) present in empty address", dataOut);
     end
 
     if (!failed) $display("dataMemory Passed");

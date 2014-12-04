@@ -1,5 +1,6 @@
 # Calls fibonacci with 4 and 10, returns the sum
 main:
+  add $sp, $zero, 0x3ffc
   add $sp, $sp, -12 # Save initial state
   sw $ra, 8($sp)
   sw $a0, 4($sp)
