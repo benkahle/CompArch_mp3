@@ -1,6 +1,6 @@
 module cpu();
 
-    #5 clk=1; #5 clk=0; #set clock to 10Mhz
+	#5 clk=1; #5 clk=0; #set clock to 10Mhz
 
     instructionMemory(#PCout);
     
