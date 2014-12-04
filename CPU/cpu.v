@@ -8,7 +8,7 @@ module cpu(clk);
 
     //Control shit for Instruction Decoder
     //Remake these wires
-    wire[4:0] rs, rt, rd;
+    wire[4:0] rs, rt, rd, WriteRegister;
     wire[2:0] aluCommand;
     wire[1:0] pcSrc, memOutSrc;
     wire[15:0] imm;
@@ -21,20 +21,20 @@ module cpu(clk);
 
     wire[31:0] WriteData;
 
-    instructionMemory(clk, PC, instruction); 
+    instructionMemory im(clk, PC, instruction); 
     //Inputs: PC (the Addr for the Instruction Memory) and clk
     //Output: 32-bit instruction
     
-    instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, memOutSrc, writebackSrc, rs, rt, rd, imm, aluZero, jImm);
+    instructionDecoder id(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, writebackSrc, rs, rt, rd, imm, aluZero, jImm);
 
 
-    wire[31:0] 32_bit_imm; 
-    signextend (clk, extSel, imm, 32_bit_imm);
+    wire[31:0] full_imm; 
+    signextend se(clk, extSel, imm, full_imm);
     //Inputs: clk, extSel and the 16-bit immediate from the instruction decoder
     //Output: 32 bit sign extended immediate
 
 
-    muxRegDst (regDst, rt, rd, WriteRegister);
+    muxRegDst mrd(clk, regDst, rt, rd, WriteRegister);
     //Based on regDst, selects rt or rd from the Instruction Decoder to go to the WriteRegister
     //Inputs: regDst, rt, rd
     //Output: WriteRegister
@@ -42,96 +42,102 @@ module cpu(clk);
    	wire[31:0] ReadData1; //Not sure if these should be reg or wire...
    	wire[31:0] ReadData2;
 
-    registerFile(ReadData1, ReadData2, WriteData, rs, rt, WriteRegister, regWrEn, clk);
+    registerFile rf(ReadData1, ReadData2, WriteData, rs, rt, WriteRegister, regWrEn, clk);
     //Inputs: WriteData (wd), ReadRegister1 (rs) , ReadRegister2 (rt) , WriteRegister (rd), regWrEn (en)
     //Outputs: ReadData1(ra) , ReadData2(rb)
 
     wire[31:0] B; //The B input to the ALU
-    muxAluSourceB(B, ReadData2, 32_bit_imm, aluSrcB);
+    muxAluSourceB mas(clk, B, ReadData2, full_imm, aluSrcB);
     //
 
     wire[31:0] aluOut;
     wire _carryout;
     wire _overflow;
-    ALU(aluOut, _carryout, aluZero, _overflow, ReadData1, B, aluCommand);
+    ALU alu(aluOut, _carryout, aluZero, _overflow, ReadData1, B, aluCommand);
     //Inputs: 
     //Outputs: aluOut, aluZero, carryout
 
     wire[31:0] dataMemOut;
-    dataMemory(clk, regWrEn, aluOut, ReadData2, dataMemOut);
+    dataMemory dm(clk, regWrEn, aluOut, ReadData2, dataMemOut);
     //Inputs:clk, regWrEn, aluOut, ReadData2
     //Output: dataMemOut
 
-    muxWriteBackSrc(WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4);
+    muxWriteBackSrc mwbs(clk, WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4);
 
 
     wire[31:0] shiftLeftOut;
-    shiftLeft2(shiftLeftOut, 32_bit_imm);
+    shiftLeft2 sl(shiftLeftOut, full_imm);
 
     wire[31:0] branch;
-    adder(branch, shiftLeftOut, pcPlus4);
+    adder a(branch, shiftLeftOut, pcPlus4);
 
     wire[31:0] jAbs;
-    jAbsConcat(jAbs, jImm, pcPlus4);
+    jAbsConcat c(jAbs, jImm, pcPlus4);
 
-    pcAdder(pcPlus4, PC);
+    pcAdder pca(pcPlus4, PC);
 
-    muxPCSrc(PC, pcSrc, jAbs, ReadData1, pcPlus4, branch);
-
+    wire[31:0] newPc;
+    muxPCSrc mpcs(clk, newPc, pcSrc, jAbs, ReadData1, pcPlus4, branch);
+    
+    always @(posedge clk) begin
+      PC = newPc;  
+    end
 
 endmodule
 
 //Defining all of our muxes and other cute small things
 
-module muxAluSourceB(B, ReadData2, 32_bit_imm, aluSrcB);
-    input[31:0] ReadData2, 32_bit_imm;
-    input aluSrcB;
-    output[31:0] B;
-
-    if(!aluSrcB) assign B = ReadData2;
-    else assign B = 32_bit_imm;
-
+module muxAluSourceB(clk, B, ReadData2, full_imm, aluSrcB);
+  input clk;
+  input[31:0] ReadData2, full_imm;
+  input aluSrcB;
+  output reg[31:0] B;
+  always @(posedge clk) begin
+    if(!aluSrcB) B = ReadData2;
+    else B = full_imm;
+  end
 endmodule
 
-module muxRegDst(regDst, rt, rd, WriteRegister);
+module muxRegDst(clk, regDst, rt, rd, WriteRegister);
+  input clk;
 	input[4:0] rt, rd;
 	input regDst;
-	output[4:0] WriteRegister; 
-
-	if (!regDst) assign WriteRegister = rd;
-	else assign  WriteRegister = rt;
-
+	output reg[4:0] WriteRegister; 
+  always @(posedge clk) begin
+  	if (!regDst) WriteRegister = rd;
+  	else  WriteRegister = rt;
+  end
 endmodule
 
-module muxWriteBackSrc(WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4);
+module muxWriteBackSrc(clk, WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4);
+  input clk;
 	input[1:0] writebackSrc;
 	input[31:0] aluOut, dataMemOut, pcPlus4;
-	output[31:0] WriteData;
-
-	if (!writebackSrc) assign WriteData = aluOut;
-	if (writebackSrc == 2'd1) assign WriteData = dataMemOut;
-	if (writebackSrc == 2'd2) assign WriteData = pcPlus4;
-
+	output reg[31:0] WriteData;
+  always @(posedge clk) begin
+  	if (!writebackSrc) WriteData = aluOut;
+  	if (writebackSrc == 2'd1) WriteData = dataMemOut;
+  	if (writebackSrc == 2'd2) WriteData = pcPlus4;
+  end
 endmodule
 
-module shiftLeft2(shiftLeftOut, 32_bit_imm);
-	input[31:0] 32_bit_imm;
+module shiftLeft2(shiftLeftOut, full_imm);
+	input[31:0] full_imm;
 	output[31:0] shiftLeftOut;
-
-	assign shiftLeftOut = 32_bit_imm << 2;
-
+  assign shiftLeftOut = full_imm << 2;
 endmodule
 
-module muxPCSrc(PC, pcSrc, jAbs, rInd, pcPlus4, branch);
-	input[31:0] jAbs, ReadData1, pcPlus4, branch;
+module muxPCSrc(clk, PC, pcSrc, jAbs, rInd, pcPlus4, branch);
+  input clk;
+	input[31:0] jAbs, pcPlus4, branch, rInd;
 	input[1:0] pcSrc;
-	output[31:0] PC;
-
-	if (!pcSrc) assign PC = pcPlus4;
-	if (pcSrc == 2'd1) assign PC = rInd;
-	if (pcSrc == 2'd2) assign PC = jAbs;
-	if (pcSrc == 2'd3) assign PC = branch;
-
+	output reg[31:0] PC;
+  always @(posedge clk) begin
+  	if (!pcSrc) PC = pcPlus4;
+  	if (pcSrc == 2'd1) PC = rInd;
+  	if (pcSrc == 2'd2) PC = jAbs;
+  	if (pcSrc == 2'd3) PC = branch;
+  end
 endmodule
 
 module adder(branch, shiftLeftOut, pcPlus4);
@@ -162,15 +168,14 @@ endmodule
 
 module testCpu;
 
-	reg clk = 0;
+	reg clk;
 
-	cpu(clk);
+	cpu cpu(clk);
 
 	initial begin
-		always #5 clk = !clk; //Switch every 5 nanoseconds
+    clk = 0;
+  end
 
-
-	end
-
+	always #5 clk = !clk; //Switch every 5 nanoseconds
 
 endmodule

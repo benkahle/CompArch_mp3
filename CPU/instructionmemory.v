@@ -1,6 +1,6 @@
 module instructionMemory(clk, addr, dataOut);
   input clk;
-  input[9:0] addr;
+  input[31:0] addr;
   output reg[31:0] dataOut;
   initial $readmemh("hexcode.dat", mem);
   reg [31:0] mem[1023:0];

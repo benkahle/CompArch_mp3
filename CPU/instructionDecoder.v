@@ -43,6 +43,7 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
           end
 
           6'd12: begin //Syscall!
+            $display("Done!");
             $stop;
           end
         endcase
@@ -111,7 +112,7 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
 
 endmodule
 
-module testBench;
+module testInstructionDecoder;
   reg clk;
   reg aluZero;
   reg[31:0] instruction;
@@ -130,7 +131,7 @@ module testBench;
     instruction = {6'd8,5'd1,5'd2,16'd1};
     #5 clk=1; #5 clk=0;
     if (rs != 5'd1) $display("addi Failure: rs is %d when expected %d", rs, rs);
-    if (rt != 5'd2) $display("addi Failure: rt is %d when expected %d", rt, rt);
+    if (rt != 5'd2) $display("addi Failure: rt is %d when expected %d", rt, rt); 
     if (rd != 5'd0) $display("addi Failure: rd is %d when expected %d", rd, rd);
     if (imm != 15'd1) $display("addi Failure: imm is %d when expected %d", imm, imm);
     if (aluCommand != 3'd0) $display("addi Failure: aluCommand is %d when expected %d", aluCommand, aluCommand);

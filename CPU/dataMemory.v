@@ -1,6 +1,6 @@
 module dataMemory(clk, regWE, addr, dataIn, dataOut);
   input clk, regWE;
-  input[9:0] addr;
+  input[31:0] addr;
   input[31:0] dataIn;
   output[31:0] dataOut;
   reg[31:0] mem[1023:0];
