@@ -4,7 +4,7 @@ module instructionMemory(clk, addr, dataOut);
   output reg[31:0] dataOut;
   initial $readmemh("hexcode.dat", mem);
   reg [31:0] mem[1023:0];
-  always @(posedge clk) begin
+  always @(*) begin
     dataOut = mem[addr/4];
   end
 endmodule

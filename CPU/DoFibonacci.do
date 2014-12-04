@@ -14,6 +14,6 @@ sim:/testCpu/cpu/jAbs \
 sim:/testCpu/cpu/im/mem \
 sim:/testCpu/cpu/dm/mem
 
-run 2000
+run 4000
 
 wave zoom full

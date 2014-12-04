@@ -79,7 +79,7 @@ module cpu(clk);
     wire[31:0] newPc;
     muxPCSrc mpcs(clk, newPc, pcSrc, jAbs, ReadData1, pcPlus4, branch);
 
-    always @(*) begin
+    always @(posedge clk) begin
       pc = newPc;  
     end
 
@@ -125,7 +125,7 @@ module shiftLeft2(clk, shiftLeftOut, full_imm);
   input clk;
 	input[31:0] full_imm;
 	output reg[31:0] shiftLeftOut;
-  always @(posedge clk) begin
+  always @(*) begin
     shiftLeftOut = full_imm << 2;
   end
 endmodule
@@ -147,7 +147,7 @@ module adder(clk, branch, shiftLeftOut, pcPlus4);
 	input clk;
   input[31:0] shiftLeftOut, pcPlus4;
 	output reg[31:0] branch;
-  always @(posedge clk) begin
+  always @(*) begin
   	branch = shiftLeftOut + pcPlus4;
   end
 endmodule
@@ -156,7 +156,7 @@ module pcAdder(clk, pcPlus4, pc);
   input clk;
 	input[31:0] pc;
 	output reg[31:0] pcPlus4;
-  always @(posedge clk) begin
+  always @(*) begin
   	pcPlus4 = pc + 3'd4;
   end
 endmodule

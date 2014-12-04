@@ -5,7 +5,7 @@ module dataMemory(clk, regWrEn, addr, dataIn, dataOut);
   output[31:0] dataOut;
   reg[31:0] mem[3999:0];
 
-  always @(posedge clk) begin
+  always @(*) begin
     if (regWrEn) begin
       mem[addr/4] <= dataIn;
     end

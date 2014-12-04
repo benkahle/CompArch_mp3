@@ -15,7 +15,7 @@ module register32(q, d, wrenable, clk);
   input clk;
   output reg[31:0] q;
 
-  always @(posedge clk) begin
+  always @(*) begin
     if(wrenable) begin
       q = d;
     end
@@ -28,7 +28,7 @@ module register32zero(q, d, wrenable, clk);
   input clk;
   output reg [31:0] q;
 
-  always @(posedge clk) begin
+  always @(*) begin
     q = 32'b0;
   end
 endmodule

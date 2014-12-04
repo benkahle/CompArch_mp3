@@ -8,7 +8,7 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
   output reg regDst, regWrEn, memWrEn, aluSrcB, extSel;
   output reg[27:0] jImm;
 
-  always @(posedge clk) begin
+  always @(*) begin
     // Set defaults
     rs = 5'd0;
     rt = 5'd0;
