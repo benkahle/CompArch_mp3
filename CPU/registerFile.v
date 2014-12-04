@@ -207,7 +207,7 @@ module hw4testbench(beginTest,
     // This will pass because the example register file is hardwired to always return 42.
     writeData = 42;
     regWrite = 1;
-    #5 clk=1; #5 Clk=0;	// Generate Clock Edge
+    #5 clk=1; #5 clk=0;	// Generate Clock Edge
     if(readData1 != 42 || readData2!= 42) begin
 	dutPassed = 0;
 	$display("Test Case 1 Failed");
@@ -216,7 +216,7 @@ module hw4testbench(beginTest,
     // Test Case 2: Write to 15 register 2, verify with Read Ports 1 and 2
     // This will fail with the example register file, but should pass with yours.
     writeData = 15;
-    #5 clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
     if(readData1 != 15 || readData2!= 15) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 2 Failed");
@@ -225,7 +225,7 @@ module hw4testbench(beginTest,
     // Test Case 3: Write register is broken and always written to.
     regWrite = 0;
     writeData = 17;
-    #5 clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
     if(readData1 == 17 || readData2 == 17) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 3 Failed");
@@ -235,7 +235,7 @@ module hw4testbench(beginTest,
     writeRegister = 3;
     writeData = 19;
     regWrite = 1;
-    #5 clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
     if(readData1 == 19 || readData2 == 19) begin
     	dutPassed = 0;	// On Failure, set to false.
     	$display("Test Case 4 Failed");
@@ -248,7 +248,7 @@ module hw4testbench(beginTest,
     writeData = 15;
     readRegister1 = 0;
     readRegister2 = 0;
-    #5 clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
     if(readData1 != 0 || readData2!= 0) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 5 Failed");
@@ -259,7 +259,7 @@ module hw4testbench(beginTest,
     writeData = 20;
     readRegister1 = 2;
     readRegister2 = 2;
-    #5 clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
 
     writeRegister = 2;
     writeData = 2;
