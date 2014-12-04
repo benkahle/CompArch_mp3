@@ -43,7 +43,7 @@ wire carryout_add;
 alucontrolLUT myLUT (
 .muxindex (mux_command), 
 .SUB_command (SUB_command), 
-.alucommand (command),
+.aluCommand (command),
 .not_SLT_mode (          ), // not used at the bitslice level, only for the full alu
 .add_or_sub_mode (         ));
 
@@ -173,19 +173,19 @@ endmodule
 `define OP_NOR 3'd6
 `define OP_OR 3'd7
 
-// this LUT, source code provided largely by Eric, takes a three bit command (alucommand),
+// this LUT, source code provided largely by Eric, takes a three bit command (aluCommand),
 // which determines what operation needs to be preformed, and returns all the neccessary
 // control lines to make this happen. 
-module alucontrolLUT(muxindex, SUB_command, ALUcommand , not_SLT_mode, add_or_sub_mode);
+module alucontrolLUT(muxindex, SUB_command, aluCommand , not_SLT_mode, add_or_sub_mode);
 output reg not_SLT_mode; // used to set all outputs to zero during SLT mode
 output reg add_or_sub_mode; // used to disable the carryout during any mode but add and subtract.
 output reg[2:0] muxindex; // controls the MUX at the end of each bitslice
 output reg SUB_command; // are we subtracting or not?
-input[2:0] alucommand; // the input command
+input[2:0] aluCommand; // the input command
 
 // here is the actual LUT, in behaviorial verilog
-always @(alucommand) begin 
-	case (alucommand)
+always @(aluCommand) begin 
+	case (aluCommand)
 	`OP_ADD:  begin muxindex = 0; SUB_command=0; not_SLT_mode=1; add_or_sub_mode=1; end
 	`OP_SUB:  begin muxindex = 0; SUB_command=1; not_SLT_mode=1; add_or_sub_mode=1; end
 	`OP_SLT:  begin muxindex = 0; SUB_command=1; not_SLT_mode=0; add_or_sub_mode=0; end
@@ -243,7 +243,7 @@ wire add_or_sub_mode; // This comes from the lookup table, and tells us if we ar
 alucontrolLUT myLUT(
 .muxindex (     ), 
 .SUB_command (initial_carryin_for_subtraction), 
-.alucommand (command), 
+.aluCommand (command), 
 .not_SLT_mode (not_SLT_mode), 
 .add_or_sub_mode (add_or_sub_mode)); 
 
