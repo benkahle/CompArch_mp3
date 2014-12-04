@@ -33,11 +33,11 @@ module testSignExtend;
     wire [31:0] extended;
 
     signExtend uut ( clk, extSel, extend, extended);
-	
+    
 
     initial begin
-	clk = 0;
-	extend = 0;
+    clk = 0;
+    extend = 0;
     extSel = 0;
         #100; // 100 ns for global reset 
 
@@ -45,42 +45,9 @@ module testSignExtend;
         clk = 1;
         #100;
         clk = 0;
-	$display("Test Cases:");
-	$display("16-bit input -d8: %b", extend);
-	$display("32-bit output -d8: %b", extended);
-	$display("");
-	#100;
-	
-	extend = -30;
-	clk = 1;
-	#100;
-	clk = 0;
-	$display("16-bit input -d30: %b", extend);
-	$display("32-bit output -d30: %b", extended);
-	$display("");
-	#100
-
-	extend = 7;
-	clk = 1;
-	#100;
-	clk = 0;
-	$display("16-bit input d7: %b", extend);
-	$display("32-bit output d7: %b", extended);
-	$display("");
-	#100
-
-	extend = 32768;
-        clk = 1;
-        #100;
-        clk = 0;
-	$display("16-bit input d32768: %b", extend);
-	$display("32-bit output d32768: %b", extended);
-
-    #100
-    extSel = 1;
-    $display("Unsigned Test Cases:");
-    $display("16-bit input -d8: %b", extend);
-    $display("32-bit output -d8: %b", extended);
+    $display("Test Cases:");
+    $display("Type       |    16-bit Input    |      32-bit Output                 |  extSel");
+    $display("Signed     |  %b  |  %b  |  %b", extend, extended, extSel);
     $display("");
     #100;
     
@@ -88,8 +55,7 @@ module testSignExtend;
     clk = 1;
     #100;
     clk = 0;
-    $display("16-bit input -d30: %b", extend);
-    $display("32-bit output -d30: %b", extended);
+    $display("Signed     |  %b  |  %b  |  %b", extend, extended, extSel);
     $display("");
     #100
 
@@ -97,8 +63,7 @@ module testSignExtend;
     clk = 1;
     #100;
     clk = 0;
-    $display("16-bit input d7: %b", extend);
-    $display("32-bit output d7: %b", extended);
+    $display("Signed     |  %b  |  %b  |  %b", extend, extended, extSel);
     $display("");
     #100
 
@@ -106,8 +71,40 @@ module testSignExtend;
         clk = 1;
         #100;
         clk = 0;
-    $display("16-bit input d32768: %b", extend);
-    $display("32-bit output d32768: %b", extended);
+    $display("Signed     |  %b  |  %b  |  %b", extend, extended, extSel);
+    $display("");
+
+    #100
+    extSel = 1;
+    extend = 32768;
+    clk = 1;
+    #100;
+    clk = 0;
+    $display("Unsigned   |  %b  |  %b  |  %b", extend, extended, extSel);
+    $display("");
+    #100;
+    
+    extend = -30;
+    clk = 1;
+    #100;
+    clk = 0;
+    $display("Unsigned   |  %b  |  %b  |  %b", extend, extended, extSel);
+    $display("");
+    #100
+
+    extend = 7;
+    clk = 1;
+    #100;
+    clk = 0;
+    $display("Unsigned   |  %b  |  %b  |  %b", extend, extended, extSel);
+    $display("");
+    #100
+
+    extend = 32768;
+        clk = 1;
+        #100;
+        clk = 0;
+    $display("Unsigned   |  %b  |  %b  |  %b", extend, extended, extSel);
 
     end
 
