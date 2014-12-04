@@ -18,6 +18,8 @@ sim:/testCpu/cpu/aluZero \
 sim:/testCpu/cpu/alu/zero \
 sim:/testCpu/cpu/ReadData1 \
 sim:/testCpu/cpu/ReadData2 \
+sim:/testCpu/cpu/rf/readRegister1 \
+sim:/testCpu/cpu/rf/readRegister2 \
 sim:/testCpu/cpu/B \
 sim:/testCpu/cpu/dm/mem
 
