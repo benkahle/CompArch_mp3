@@ -66,15 +66,15 @@ module cpu(clk);
 
 
     wire[31:0] shiftLeftOut;
-    shiftLeft2 sl(shiftLeftOut, full_imm);
+    shiftLeft2 sl(clk, shiftLeftOut, full_imm);
 
     wire[31:0] branch;
-    adder a(branch, shiftLeftOut, pcPlus4);
+    adder a(clk, branch, shiftLeftOut, pcPlus4);
 
     wire[31:0] jAbs;
     jAbsConcat c(jAbs, jImm, pcPlus4);
 
-    pcAdder pca(pcPlus4, PC);
+    pcAdder pca(clk, pcPlus4, PC);
 
     wire[31:0] newPc;
     muxPCSrc mpcs(clk, newPc, pcSrc, jAbs, ReadData1, pcPlus4, branch);
@@ -121,10 +121,13 @@ module muxWriteBackSrc(clk, WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4
   end
 endmodule
 
-module shiftLeft2(shiftLeftOut, full_imm);
+module shiftLeft2(clk, shiftLeftOut, full_imm);
+  input clk;
 	input[31:0] full_imm;
-	output[31:0] shiftLeftOut;
-  assign shiftLeftOut = full_imm << 2;
+	output reg[31:0] shiftLeftOut;
+  always @(posedge clk) begin
+    shiftLeftOut = full_imm << 2;
+  end
 endmodule
 
 module muxPCSrc(clk, PC, pcSrc, jAbs, rInd, pcPlus4, branch);
@@ -140,18 +143,22 @@ module muxPCSrc(clk, PC, pcSrc, jAbs, rInd, pcPlus4, branch);
   end
 endmodule
 
-module adder(branch, shiftLeftOut, pcPlus4);
-	input[31:0] shiftLeftOut, pcPlus4;
-	output[31:0] branch;
-	assign branch = shiftLeftOut + pcPlus4;
+module adder(clk, branch, shiftLeftOut, pcPlus4);
+	input clk;
+  input[31:0] shiftLeftOut, pcPlus4;
+	output reg[31:0] branch;
+  always @(posedge clk) begin
+  	branch = shiftLeftOut + pcPlus4;
+  end
 endmodule
 
-module pcAdder(pcPlus4, PC);
+module pcAdder(clk, pcPlus4, PC);
+  input clk;
 	input[31:0] PC;
-	output[31:0] pcPlus4;
-
-	assign pcPlus4 = PC + 3'd4;
-
+	output reg[31:0] pcPlus4;
+  always @(posedge clk) begin
+  	pcPlus4 = PC + 3'd4;
+  end
 endmodule
 
 module jAbsConcat(jAbs, jImm, pcPlus4);
