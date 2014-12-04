@@ -27,7 +27,6 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
     rd = instruction[15:11];
     imm = instruction[15:0];
     jImm = 28'd0;
-
     //Check Opcode to determine instruction type
     case(instruction[31:26])
       6'b000000: begin // R-Type instruction
