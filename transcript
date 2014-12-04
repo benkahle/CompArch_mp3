@@ -932,3 +932,26 @@ do registerFile.do
 #     ("uplevel" body line 1)
 #     invoked from within
 # "uplevel 1 ::tcl_unknown $args"
+do registerFile.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:22:23 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# ** Error: registerFile.v(210): (vlog-2730) Undefined variable: 'Clk'.
+# 
+# End time: 16:22:23 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Error in macro ./registerFile.do line 1
+# invalid command name "vsim_increment_error_count"
+#     while executing
+# "::tcl_unknown vsim_increment_error_count"
+#     ("uplevel" body line 1)
+#     invoked from within
+# "uplevel 1 ::tcl_unknown $args"

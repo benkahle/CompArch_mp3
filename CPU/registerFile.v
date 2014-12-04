@@ -87,7 +87,7 @@ module registerFile(readData1, // Contents of first register read
  		readRegister2, // Address of second register to read
 		writeRegister, // Address of register to write
  		regWrite, // Enable writing of register when High
- 		Clk); // Clock (Positive Edge Triggered)
+ 		clk); // Clock (Positive Edge Triggered)
   output[31:0]	readData1;
   output[31:0]	readData2;
   input[31:0]	writeData;
@@ -95,18 +95,18 @@ module registerFile(readData1, // Contents of first register read
   input[4:0]	readRegister2;
   input[4:0]	writeRegister;
   input		regWrite;
-  input		Clk;
+  input		clk;
 
   wire [31:0]	WriteEnable;
   wire [31:0]	Q[31:0];	
 
-  register32zero regZero(Q[0], writeData, WriteEnable[0], Clk); 
+  register32zero regZero(Q[0], writeData, WriteEnable[0], clk); 
 
   decoder1to32 decode(WriteEnable, regWrite, writeRegister);
   genvar i;
   generate 
     for (i = 1; i<32; i = i+1) begin: loop
-      register32 register(Q[i], writeData, WriteEnable[i], Clk);
+      register32 register(Q[i], writeData, WriteEnable[i], clk);
     end
   endgenerate
 
@@ -124,7 +124,7 @@ module hw4testbenchharness;
   wire[4:0]	readRegister2;
   wire[4:0]	writeRegister;
   wire		regWrite;
-  wire		Clk;
+  wire		clk;
   reg		beginTest;
 
   // The register file being tested.  DUT = Device Under Test
@@ -135,7 +135,7 @@ module hw4testbenchharness;
 		readRegister2,
 		writeRegister,
 		regWrite, 
-		Clk);
+		clk);
  
   // The test harness to test the DUT
   hw4testbench tester(beginTest, 
@@ -148,7 +148,7 @@ module hw4testbenchharness;
 			readRegister2,
 			writeRegister,
 			regWrite, 
-			Clk);
+			clk);
 
 initial begin
 beginTest=0;
@@ -172,7 +172,7 @@ module hw4testbench(beginTest,
 			readRegister2,
 			writeRegister,
 			regWrite, 
-			Clk);
+			clk);
   output reg endTest;
   output reg dutPassed;
   input	   beginTest;
@@ -184,7 +184,7 @@ module hw4testbench(beginTest,
   output reg[4:0]	readRegister2;
   output reg[4:0]	writeRegister;
   output reg		regWrite;
-  output reg		Clk;
+  output reg		clk;
 
   initial begin
     writeData=0;
@@ -192,7 +192,7 @@ module hw4testbench(beginTest,
     readRegister2=0;
     writeRegister=0;
     regWrite=0;
-    Clk=0;
+    clk=0;
   end
 
   always @(posedge beginTest) begin
@@ -207,7 +207,7 @@ module hw4testbench(beginTest,
     // This will pass because the example register file is hardwired to always return 42.
     writeData = 42;
     regWrite = 1;
-    #5 Clk=1; #5 Clk=0;	// Generate Clock Edge
+    #5 clk=1; #5 Clk=0;	// Generate Clock Edge
     if(readData1 != 42 || readData2!= 42) begin
 	dutPassed = 0;
 	$display("Test Case 1 Failed");
@@ -216,7 +216,7 @@ module hw4testbench(beginTest,
     // Test Case 2: Write to 15 register 2, verify with Read Ports 1 and 2
     // This will fail with the example register file, but should pass with yours.
     writeData = 15;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 Clk=0;
     if(readData1 != 15 || readData2!= 15) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 2 Failed");
@@ -225,7 +225,7 @@ module hw4testbench(beginTest,
     // Test Case 3: Write register is broken and always written to.
     regWrite = 0;
     writeData = 17;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 Clk=0;
     if(readData1 == 17 || readData2 == 17) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 3 Failed");
@@ -235,7 +235,7 @@ module hw4testbench(beginTest,
     writeRegister = 3;
     writeData = 19;
     regWrite = 1;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 Clk=0;
     if(readData1 == 19 || readData2 == 19) begin
     	dutPassed = 0;	// On Failure, set to false.
     	$display("Test Case 4 Failed");
@@ -248,7 +248,7 @@ module hw4testbench(beginTest,
     writeData = 15;
     readRegister1 = 0;
     readRegister2 = 0;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 Clk=0;
     if(readData1 != 0 || readData2!= 0) begin
 	dutPassed = 0;	// On Failure, set to false.
 	$display("Test Case 5 Failed");
@@ -259,11 +259,11 @@ module hw4testbench(beginTest,
     writeData = 20;
     readRegister1 = 2;
     readRegister2 = 2;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 Clk=0;
 
     writeRegister = 2;
     writeData = 2;
-    #5 Clk=1; #5 Clk=0;
+    #5 clk=1; #5 clk=0;
 
     if(readData1 == 20 || readData2 == 20) begin
 	dutPassed = 0;	// On Failure, set to false.
