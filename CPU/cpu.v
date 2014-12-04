@@ -1,8 +1,8 @@
 module cpu(clk);
 	input clk;
 
-    reg[31:0] PC;	//Assuming a 32 bit program counter
-    initial PC = 0; //TODO: fix memory addresses
+    reg[31:0] pc;	//Assuming a 32 bit program counter
+    initial pc = 0; //TODO: fix memory addresses
 
     wire[31:0] instruction; 
 
@@ -21,8 +21,8 @@ module cpu(clk);
 
     wire[31:0] WriteData;
 
-    instructionMemory im(clk, PC, instruction); 
-    //Inputs: PC (the Addr for the Instruction Memory) and clk
+    instructionMemory im(clk, pc, instruction); 
+    //Inputs: pc (the Addr for the Instruction Memory) and clk
     //Output: 32-bit instruction
     
     instructionDecoder id(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, writebackSrc, rs, rt, rd, imm, aluZero, jImm);
@@ -74,13 +74,13 @@ module cpu(clk);
     wire[31:0] jAbs;
     jAbsConcat c(jAbs, jImm, pcPlus4);
 
-    pcAdder pca(clk, pcPlus4, PC);
+    pcAdder pca(clk, pcPlus4, pc);
 
     wire[31:0] newPc;
     muxPCSrc mpcs(clk, newPc, pcSrc, jAbs, ReadData1, pcPlus4, branch);
-    
-    always @(posedge clk) begin
-      PC = newPc;  
+
+    always @(*) begin
+      pc = newPc;  
     end
 
 endmodule
@@ -92,7 +92,7 @@ module muxAluSourceB(clk, B, ReadData2, full_imm, aluSrcB);
   input[31:0] ReadData2, full_imm;
   input aluSrcB;
   output reg[31:0] B;
-  always @(posedge clk) begin
+  always @(*) begin
     if(!aluSrcB) B = ReadData2;
     else B = full_imm;
   end
@@ -103,7 +103,7 @@ module muxRegDst(clk, regDst, rt, rd, WriteRegister);
 	input[4:0] rt, rd;
 	input regDst;
 	output reg[4:0] WriteRegister; 
-  always @(posedge clk) begin
+  always @(*) begin
   	if (!regDst) WriteRegister = rd;
   	else  WriteRegister = rt;
   end
@@ -114,7 +114,7 @@ module muxWriteBackSrc(clk, WriteData, writebackSrc, aluOut, dataMemOut, pcPlus4
 	input[1:0] writebackSrc;
 	input[31:0] aluOut, dataMemOut, pcPlus4;
 	output reg[31:0] WriteData;
-  always @(posedge clk) begin
+  always @(*) begin
   	if (!writebackSrc) WriteData = aluOut;
   	if (writebackSrc == 2'd1) WriteData = dataMemOut;
   	if (writebackSrc == 2'd2) WriteData = pcPlus4;
@@ -130,16 +130,16 @@ module shiftLeft2(clk, shiftLeftOut, full_imm);
   end
 endmodule
 
-module muxPCSrc(clk, PC, pcSrc, jAbs, rInd, pcPlus4, branch);
+module muxPCSrc(clk, pc, pcSrc, jAbs, rInd, pcPlus4, branch);
   input clk;
 	input[31:0] jAbs, pcPlus4, branch, rInd;
 	input[1:0] pcSrc;
-	output reg[31:0] PC;
-  always @(posedge clk) begin
-  	if (!pcSrc) PC = pcPlus4;
-  	if (pcSrc == 2'd1) PC = rInd;
-  	if (pcSrc == 2'd2) PC = jAbs;
-  	if (pcSrc == 2'd3) PC = branch;
+	output reg[31:0] pc;
+  always @(*) begin
+  	if (!pcSrc) pc = pcPlus4;
+  	if (pcSrc == 2'd1) pc = rInd;
+  	if (pcSrc == 2'd2) pc = jAbs;
+  	if (pcSrc == 2'd3) pc = branch;
   end
 endmodule
 
@@ -152,12 +152,12 @@ module adder(clk, branch, shiftLeftOut, pcPlus4);
   end
 endmodule
 
-module pcAdder(clk, pcPlus4, PC);
+module pcAdder(clk, pcPlus4, pc);
   input clk;
-	input[31:0] PC;
+	input[31:0] pc;
 	output reg[31:0] pcPlus4;
   always @(posedge clk) begin
-  	pcPlus4 = PC + 3'd4;
+  	pcPlus4 = pc + 3'd4;
   end
 endmodule
 
@@ -169,9 +169,6 @@ module jAbsConcat(jAbs, jImm, pcPlus4);
 	assign jAbs = {pcPlus4[31:27], jImm};
 
 endmodule
-
-
-
 
 module testCpu;
 
