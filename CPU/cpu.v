@@ -1,13 +1,11 @@
 module cpu(clk);
 	input clk;
 
-    reg[31:0] pc;	//Assuming a 32 bit program counter
-    initial pc = 0; //TODO: fix memory addresses
+    reg[31:0] pc;
+    initial pc = 0;
 
     wire[31:0] instruction; 
 
-    //Control shit for Instruction Decoder
-    //Remake these wires
     wire[4:0] rs, rt, rd, WriteRegister;
     wire[2:0] aluCommand;
     wire[1:0] pcSrc, memOutSrc;
@@ -80,7 +78,8 @@ module cpu(clk);
     muxPCSrc mpcs(clk, newPc, pcSrc, jAbs, ReadData1, pcPlus4, branch);
 
     always @(posedge clk) begin
-      pc = newPc;  
+      // $display("pc set to: %d", newPc);
+      pc = newPc;
     end
 
 endmodule
@@ -124,41 +123,36 @@ endmodule
 module shiftLeft2(clk, shiftLeftOut, full_imm);
   input clk;
 	input[31:0] full_imm;
-	output reg[31:0] shiftLeftOut;
-  always @(*) begin
-    shiftLeftOut = full_imm << 2;
-  end
+	output [31:0] shiftLeftOut;
+  assign shiftLeftOut = full_imm << 2;
 endmodule
 
-module muxPCSrc(clk, pc, pcSrc, jAbs, rInd, pcPlus4, branch);
+module muxPCSrc(clk, newPc, pcSrc, jAbs, rInd, pcPlus4, branch);
   input clk;
 	input[31:0] jAbs, pcPlus4, branch, rInd;
 	input[1:0] pcSrc;
-	output reg[31:0] pc;
+	output[31:0] newPc;
   always @(*) begin
-  	if (!pcSrc) pc = pcPlus4;
-  	if (pcSrc == 2'd1) pc = rInd;
-  	if (pcSrc == 2'd2) pc = jAbs;
-  	if (pcSrc == 2'd3) pc = branch;
+    // $display("pcSrc = %d", pcSrc);
+  	if (pcSrc == 2'd0) newPc = pcPlus4;
+  	if (pcSrc == 2'd1) newPc = rInd;
+  	if (pcSrc == 2'd2) newPc = jAbs;
+  	if (pcSrc == 2'd3) newPc = branch;
   end
 endmodule
 
 module adder(clk, branch, shiftLeftOut, pcPlus4);
 	input clk;
   input[31:0] shiftLeftOut, pcPlus4;
-	output reg[31:0] branch;
-  always @(*) begin
-  	branch = shiftLeftOut + pcPlus4;
-  end
+	output[31:0] branch;
+  assign branch = shiftLeftOut + pcPlus4;
 endmodule
 
 module pcAdder(clk, pcPlus4, pc);
   input clk;
 	input[31:0] pc;
-	output reg[31:0] pcPlus4;
-  always @(*) begin
-  	pcPlus4 = pc + 3'd4;
-  end
+	output[31:0] pcPlus4;
+  assign pcPlus4 = pc + 3'd4;
 endmodule
 
 module jAbsConcat(jAbs, jImm, pcPlus4);

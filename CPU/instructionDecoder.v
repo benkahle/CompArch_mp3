@@ -10,11 +10,11 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
 
   always @(*) begin
     // Set defaults
+    pcSrc = 2'd0; // pc+4
     rs = 5'd0;
     rt = 5'd0;
     rd = 5'd0;
     imm = 15'd0;
-    pcSrc = 2'd0; // pc+4
     regDst = 0; // rd
     regWrEn = 0; // No Write
     aluSrcB = 0; // register

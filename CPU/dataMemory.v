@@ -2,15 +2,15 @@ module dataMemory(clk, regWrEn, addr, dataIn, dataOut);
   input clk, regWrEn;
   input[31:0] addr;
   input[31:0] dataIn;
-  output[31:0] dataOut;
+  output reg[31:0] dataOut;
   reg[31:0] mem[3999:0];
 
   always @(posedge clk) begin
     if (regWrEn) begin
       mem[addr/4] <= dataIn;
     end
+    dataOut = mem[addr/4];
   end
-  assign dataOut = mem[addr/4];
 endmodule
 
 module testBench;

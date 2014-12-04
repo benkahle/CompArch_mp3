@@ -28,6 +28,7 @@ module register32zero(q, d, wrenable, clk);
   input clk;
   output reg [31:0] q;
 
+  initial q = 32'b0;
   always @(*) begin
     q = 32'b0;
   end
