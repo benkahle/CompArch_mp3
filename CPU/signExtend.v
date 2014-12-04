@@ -1,4 +1,4 @@
-module signextend( clk, extSel, extend, extended);
+module signExtend( clk, extSel, extend, extended);
 //Extends an 8 bit input to a 32 bit output
 input[15:0] extend;
 input clk;
@@ -24,7 +24,7 @@ endmodule
 
 
 
-module testsignextend;
+module testSignExtend;
 
     reg [15:0] extend;
     reg clk;
@@ -32,7 +32,7 @@ module testsignextend;
 
     wire [31:0] extended;
 
-    signextend uut ( clk, extSel, extend, extended);
+    signExtend uut ( clk, extSel, extend, extended);
 	
 
     initial begin

@@ -29,7 +29,7 @@ module cpu(clk);
 
 
     wire[31:0] full_imm; 
-    signextend se(clk, extSel, imm, full_imm);
+    signExtend se(clk, extSel, imm, full_imm);
     //Inputs: clk, extSel and the 16-bit immediate from the instruction decoder
     //Output: 32 bit sign extended immediate
 
@@ -53,7 +53,7 @@ module cpu(clk);
     wire[31:0] aluOut;
     wire _carryout;
     wire _overflow;
-    ALU alu(aluOut, _carryout, aluZero, _overflow, ReadData1, B, aluCommand);
+    alu alu(aluOut, _carryout, aluZero, _overflow, ReadData1, B, aluCommand);
     //Inputs: 
     //Outputs: aluOut, aluZero, carryout
 

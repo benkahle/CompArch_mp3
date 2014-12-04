@@ -1,12 +1,12 @@
-vlog -reportprogress 300 -work work ALU.v
-vsim -voptargs="+acc" Tester_ThirtyTwo_Bit_ALU
+vlog -reportprogress 300 -work work alu.v
+vsim -voptargs="+acc" aluTestBench
 add wave -position insertpoint \
-sim:/Tester_ThirtyTwo_Bit_ALU/operandA \
-sim:/Tester_ThirtyTwo_Bit_ALU/operandB \
-sim:/Tester_ThirtyTwo_Bit_ALU/command \
-sim:/Tester_ThirtyTwo_Bit_ALU/result \
-sim:/Tester_ThirtyTwo_Bit_ALU/carryout \
-sim:/Tester_ThirtyTwo_Bit_ALU/zero \
-sim:/Tester_ThirtyTwo_Bit_ALU/overflow
+sim:/aluTestBench/operandA \
+sim:/aluTestBench/operandB \
+sim:/aluTestBench/command \
+sim:/aluTestBench/result \
+sim:/aluTestBench/carryout \
+sim:/aluTestBench/zero \
+sim:/aluTestBench/overflow
 run -all
 wave zoom full

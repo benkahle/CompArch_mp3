@@ -6,9 +6,9 @@
 `define NAND2 nand #20 // basic 2 input NAND
 `define NOR2 nor #20 // basic 2 input NOR
 
-// this module serves to calculate one bit of a ALU, given a command to preform one of eight different
+// this module serves to calculate one bit of a alu, given a command to preform one of eight different
 // arithmatic operations.
-module ALU_Bitslice(result_i, A_i, B_i, carryin, carryout, command);
+module alu_Bitslice(result_i, A_i, B_i, carryin, carryout, command);
 
 // setting up all inputs and wires that will be used
 input A_i;
@@ -40,11 +40,11 @@ wire carryout_add;
 // bitslice, but I trust my synthesiser to remove most of them, and it keeps things more readable
 // (I don't have to pass around as many control wires between modules)
 
-ALUcontrolLUT myLUT (
+alucontrolLUT myLUT (
 .muxindex (mux_command), 
 .SUB_command (SUB_command), 
-.ALUcommand (command),
-.not_SLT_mode (          ), // not used at the bitslice level, only for the full ALU
+.alucommand (command),
+.not_SLT_mode (          ), // not used at the bitslice level, only for the full alu
 .add_or_sub_mode (         ));
 
 
@@ -173,19 +173,19 @@ endmodule
 `define OP_NOR 3'd6
 `define OP_OR 3'd7
 
-// this LUT, source code provided largely by Eric, takes a three bit command (ALUcommand),
+// this LUT, source code provided largely by Eric, takes a three bit command (alucommand),
 // which determines what operation needs to be preformed, and returns all the neccessary
 // control lines to make this happen. 
-module ALUcontrolLUT(muxindex, SUB_command, ALUcommand , not_SLT_mode, add_or_sub_mode);
+module alucontrolLUT(muxindex, SUB_command, ALUcommand , not_SLT_mode, add_or_sub_mode);
 output reg not_SLT_mode; // used to set all outputs to zero during SLT mode
 output reg add_or_sub_mode; // used to disable the carryout during any mode but add and subtract.
 output reg[2:0] muxindex; // controls the MUX at the end of each bitslice
 output reg SUB_command; // are we subtracting or not?
-input[2:0] ALUcommand; // the input command
+input[2:0] alucommand; // the input command
 
 // here is the actual LUT, in behaviorial verilog
-always @(ALUcommand) begin 
-	case (ALUcommand)
+always @(alucommand) begin 
+	case (alucommand)
 	`OP_ADD:  begin muxindex = 0; SUB_command=0; not_SLT_mode=1; add_or_sub_mode=1; end
 	`OP_SUB:  begin muxindex = 0; SUB_command=1; not_SLT_mode=1; add_or_sub_mode=1; end
 	`OP_SLT:  begin muxindex = 0; SUB_command=1; not_SLT_mode=0; add_or_sub_mode=0; end
@@ -202,7 +202,7 @@ endmodule
 
 
 
-`define num_bits 8'd32 // how many bits do you want your ALU to be? This module is fully parameterized by this define.
+`define num_bits 8'd32 // how many bits do you want your alu to be? This module is fully parameterized by this define.
 
 `define AND2 and #30 // 2 input NAND gate followed by 1 input inverter == 30 units of time
 `define OR2 or #30 // 2 input NOR gate followed by 1 input inverter == 30 units of time
@@ -211,21 +211,21 @@ endmodule
 // three of them. All NAND gates are 2 input, so this makes a delay of 6 inputs == 60 units of time
 
 
-// this ALU can preform the 8 basic operations requested by MP1.
-module ALU(result, carryout, zero, overflow, operandA, operandB, command);
+// this alu can preform the 8 basic operations requested by MP1.
+module alu(result, carryout, zero, overflow, operandA, operandB, command);
 output[(`num_bits-1):0] result; 
 output carryout; 
 output zero; // this is one if the result is zero (every bit in the result bus is a zero)
 output overflow;
 input[(`num_bits-1):0] operandA; // inputs A and B. each are n-bits
 input[(`num_bits-1):0] operandB;
-input[2:0] command; // three bit command telling the ALU what to do. This gets parsed through a LUT
+input[2:0] command; // three bit command telling the alu what to do. This gets parsed through a LUT
 
 
 // this wire is used for connecting the carry chain for the adder
 wire [`num_bits:0]internal_carrys; // one extra index (length n+1), since internal_carrys[0] is actually the initial carryin
 wire [(`num_bits-1):0]results_raw; // the 'results' straight out of the bitslices. still needs some conditioning
-// before they are ready to leave the ALU.
+// before they are ready to leave the alu.
 wire first_bit; // the first bit straight out of the bit slice. This bit needs even more conditioning, since during SLT it
 // may also be set to one. Therefore, this bit doesn't go into the results_raw.
 wire initial_carryin_for_subtraction; // if we are subtracting (based on output from LUT), then we need a carryin to the adder chain.
@@ -240,10 +240,10 @@ wire add_or_sub_mode; // This comes from the lookup table, and tells us if we ar
 
 // LUT:
 // mux index not needed in the top layer (only in the bitslices).
-ALUcontrolLUT myLUT(
+alucontrolLUT myLUT(
 .muxindex (     ), 
 .SUB_command (initial_carryin_for_subtraction), 
-.ALUcommand (command), 
+.alucommand (command), 
 .not_SLT_mode (not_SLT_mode), 
 .add_or_sub_mode (add_or_sub_mode)); 
 
@@ -255,7 +255,7 @@ assign internal_carrys[0] = initial_carryin_for_subtraction; // only to make thi
 generate
 genvar index;
 	for (index = 0; index< `num_bits; index = index + 1) begin
-		ALU_Bitslice current_slice(.result_i (results_raw[index]), .A_i(operandA[index]), .B_i(operandB[index]), .carryin(internal_carrys[index]), .carryout(internal_carrys[index + 1]), .command(command));
+		alu_Bitslice current_slice(.result_i (results_raw[index]), .A_i(operandA[index]), .B_i(operandB[index]), .carryin(internal_carrys[index]), .carryout(internal_carrys[index + 1]), .command(command));
 	end
 endgenerate
 
@@ -281,7 +281,7 @@ endgenerate
 
 // calculating zero flag
 assign #(`num_bits*10) zero = (~|(result)); // I could not get an addapable structural command to work here. Maybe some sort of generate loop that nors them all together,
-// but preforming a bitwise nor was the only simple way I could get working that still adapts to different size ALUs.
+// but preforming a bitwise nor was the only simple way I could get working that still adapts to different size alus.
 // delay == 10* num inputs == 10* num_bits
 
 // finally, decide whether or not to set the first bit to one (the wentireber to one) when in SLT mode
@@ -316,8 +316,8 @@ endmodule
 
 
 
-// tests functionality of a 32 bit ALU
-module Tester_ThirtyTwo_Bit_ALU;
+// tests functionality of a 32 bit alu
+module aluTestBench;
 reg [31:0]operandA;
 reg [31:0]operandB;
 reg [2:0] command;
@@ -328,7 +328,7 @@ wire overflow;
 
 
 
-ALU my_32_bit_ALU(
+alu alu32Bit(
 .result (result), 
 .carryout (carryout), 
 .zero (zero), 

@@ -1,8 +1,8 @@
-vlog -reportprogress 300 -work work signextend.v
-vsim -voptargs="+acc" testsignextend
+vlog -reportprogress 300 -work work signExtend.v
+vsim -voptargs="+acc" testSignExtend
 add wave -position insertpoint \
-sim:/testsignextend/clk \
-sim:/testsignextend/extend \
-sim:/testsignextend/extended
+sim:/testSignExtend/clk \
+sim:/testSignExtend/extend \
+sim:/testSignExtend/extended
 run -all
 wave zoom full
