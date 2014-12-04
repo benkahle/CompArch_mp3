@@ -1,11 +1,12 @@
-module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, memOutSrc, rs, rt, rd, imm, aluZero);
+module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, writebackSrc, rs, rt, rd, imm, aluZero, jImm);
   input clk, aluZero;
   input[31:0] instruction;
   output reg[15:0] imm;
   output reg[4:0] rs, rt, rd;
   output reg[2:0] aluCommand; //TODO: do we need to support all 7 operations? 
-  output reg[1:0] pcSrc, memOutSrc;
+  output reg[1:0] pcSrc, writebackSrc;
   output reg regDst, regWrEn, memWrEn, aluSrcB, extSel;
+  output reg[27:0] jImm;
 
   always @(posedge clk) begin
     // Set defaults
@@ -20,16 +21,17 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
     extSel = 0; // signed extension 
     aluCommand = 3'd0; // ALU ADD
     memWrEn = 0; // No Write
-    memOutSrc = 2'd0; // ALU
+    writebackSrc = 2'd0; // ALU
     rs = instruction[25:21];
     rt = instruction[20:16];
     rd = instruction[15:11];
     imm = instruction[15:0];
+    jImm = 28'd0;
 
     //Check Opcode to determine instruction type
     case(instruction[31:26])
       6'b000000: begin // R-Type instruction
-        case(instruction[5:0]) //Check Funct to determine operation
+        case(instruction[5:0]) // Check Funct to determine operation
           6'd8: begin // jr
             pcSrc = 2'd1; // Reg indirect
           end
@@ -45,16 +47,13 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
           end
         endcase
       end
-      // J-Type Instructions
-      6'd2: begin // j
-        pcSrc = 2'd2; // J Absolute
-      end
 
       6'd3: begin // jal
         rd = 5'd31; // Special register for $ra
         regWrEn = 1; // Write back enable
-        memOutSrc = 2'd2; // PC+4
+        writebackSrc = 2'd2; // PC+4
         pcSrc = 2'd2; // J Absolute
+        jImm = intruction[25:0] << 2;
       end
 
       // I-Type Instructions
@@ -97,12 +96,13 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
        // rt = mem[rs+imm]:4 TODO: ensure division by 4 is working
        regDst = 1; // rt
        regWrEn = 1; // Write back enable
-       memOutSrc = 2'd1; // Mem
+       writebackSrc = 2'd1; // Mem
       end
 
       6'd43: begin // sw
         // mem[rs+imm]:4 = rt
         aluSrcB = 1; // Use immediate in ALU calc (displacement)
+        memWrEn = 1;
       end
     endcase
   end
@@ -110,4 +110,18 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
 endmodule
 
 module testBench;
+  reg clk;
+  reg aluZero;
+  reg[31:0] instruction;
+  wire[15:0] imm;
+  wire[4:0] rs, rt, rd;
+  wire[2:0] aluCommand; //TODO: do we need to support all 7 operations? 
+  wire[1:0] pcSrc, writebackSrc;
+  wire regDst, regWrEn, memWrEn, aluSrcB, extSel;
+
+  instructionDecoder dec(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluSrcB, aluCommand, memWrEn, writebackSrc, rs, rt, rd, imm, aluZero);
+
+  initial begin
+    
+  end
 endmodule
