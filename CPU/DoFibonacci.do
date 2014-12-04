@@ -12,8 +12,15 @@ sim:/testCpu/cpu/id/imm \
 sim:/testCpu/cpu/id/pcSrc \
 sim:/testCpu/cpu/jAbs \
 sim:/testCpu/cpu/im/mem \
+sim:/testCpu/cpu/id/aluCommand \
+sim:/testCpu/cpu/id/aluZero \
+sim:/testCpu/cpu/aluZero \
+sim:/testCpu/cpu/alu/zero \
+sim:/testCpu/cpu/ReadData1 \
+sim:/testCpu/cpu/ReadData2 \
+sim:/testCpu/cpu/B \
 sim:/testCpu/cpu/dm/mem
 
-run 4000 
+run 450
 
 wave zoom full

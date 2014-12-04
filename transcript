@@ -1,11 +1,8 @@
 # Reading C:/Modeltech_pe_edu_10.3c/tcl/vsim/pref.tcl
-cd /c:/Users/rspring
-# couldn't change working directory to "/c:/Users/rspring": no such file or directory
-cd c:
-pwd
-# C:/Users/rspring/CompArch_mp3
 ls
 # CPU
+# block_diag.ai
+# block_diag.eps
 # block_diagram1.JPG
 # block_diagram2.JPG
 # fibonacci.asm
@@ -13,149 +10,925 @@ ls
 # inst_list.txt
 # mp3_stack.eps
 # transcript
-vlib work
-vmap work work
-# Model Technology ModelSim PE vmap 10.3c Lib Mapping Utility 2014.07 Jul 19 2014
-# vmap -modelsim_quiet work work 
-# Copying c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini
-# Modifying modelsim.ini
-# ** Warning: Copied c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini.
-#          Updated modelsim.ini.
-clear
-# couldn't execute "C:\Program Files (x86)\Git\bin\clear": no such file or directory
-pwd
-# C:/Users/rspring/CompArch_mp3
 cd CPU
-# reading c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini
-
-ls
-# ALU
-# alu.do
-# cpu.do
-# cpu.v
-# dataMemory
-# dataMemory.bak
-# dataMemory.v
-# datamemory.v.bak
-# instructionDecoder.v
-# instructionmemory.v
-# registerFile.v
-# signextend.do
-# signextend.v
-do dataMemory
+# reading modelsim.ini
+do DoFibonacci.do
 # Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:07:47 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# ** Error: (vlog-19) Failed to access library 'work' at "work".
+# Start time: 15:23:25 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
 # 
-# No such file or directory. (errno = ENOENT)
-# End time: 19:08:08 on Dec 02,2014, Elapsed time: 0:00:21
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 15:23:25 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# //  ModelSim PE Student Edition 10.3c Jul 19 2014 
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# // NOT FOR CORPORATE OR PRODUCTION USE.
+# // THE ModelSim PE Student Edition IS NOT A SUPPORTED PRODUCT.
+# // FOR HIGHER EDUCATION PURPOSES ONLY
+# //
+# vsim -gui 
+# Start time: 15:23:25 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 2100 ns
+exit -sim
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 15:45:41 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 15:45:41 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 15:45:41 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 4200 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 15:56:48 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 15:56:48 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 15:56:50 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 4200 ns
+exit -sim
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:02:29 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:02:29 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:02:29 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# ** Error: (vish-4014) No objects found matching '/testCpu/cpu/alu/aluCommand'.
+# Error in macro ./DoFibonacci.do line 16
+# invalid command name "vsim_increment_error_count"
+#     while executing
+# "::tcl_unknown vsim_increment_error_count"
+#     ("uplevel" body line 1)
+#     invoked from within
+# "uplevel 1 ::tcl_unknown $args"
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:03:17 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:03:18 on Dec 04,2014, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:03:20 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:05:08 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:05:08 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:05:11 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:07:23 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:07:23 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:07:25 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:08:30 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:08:31 on Dec 04,2014, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:08:33 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:10:08 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:10:09 on Dec 04,2014, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:10:11 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+do DoFibonacci.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:11:25 on Dec 04,2014
+# vlog -reportprogress 300 -work work cpu.v instructionMemory.v instructionDecoder.v registerFile.v ALU.v dataMemory.v signextend.v 
+# -- Compiling module cpu
+# -- Compiling module muxAluSourceB
+# -- Compiling module muxRegDst
+# -- Compiling module muxWriteBackSrc
+# -- Compiling module shiftLeft2
+# -- Compiling module muxPCSrc
+# -- Compiling module adder
+# -- Compiling module pcAdder
+# -- Compiling module jAbsConcat
+# -- Compiling module testCpu
+# -- Compiling module instructionMemory
+# -- Compiling module testBench
+# -- Compiling module instructionDecoder
+# -- Compiling module testInstructionDecoder
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# -- Compiling module alu_Bitslice
+# -- Compiling module One_Bit_FullAdder
+# -- Compiling module Eight_Bit_Muxer
+# -- Compiling module alucontrolLUT
+# -- Compiling module alu
+# -- Compiling module aluTestBench
+# -- Compiling module dataMemory
+# ** Warning: dataMemory.v(16): (vlog-2275) 'testBench' already exists and will be overwritten.
+# 
+# -- Compiling module testBench
+# -- Compiling module signExtend
+# -- Compiling module testSignExtend
+# 
+# Top level modules:
+# 	testCpu
+# 	testBench
+# 	testInstructionDecoder
+# 	hw4testbenchharness
+# 	aluTestBench
+# 	testSignExtend
+# End time: 16:11:25 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim 
+# Start time: 16:11:28 on Dec 04,2014
+# Loading work.testCpu
+# Loading work.cpu
+# Loading work.instructionMemory
+# Loading work.instructionDecoder
+# Loading work.signExtend
+# Loading work.muxRegDst
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.muxAluSourceB
+# Loading work.alu
+# Loading work.alucontrolLUT
+# Loading work.dataMemory
+# Loading work.muxWriteBackSrc
+# Loading work.shiftLeft2
+# Loading work.adder
+# Loading work.jAbsConcat
+# Loading work.pcAdder
+# Loading work.muxPCSrc
+# Loading work.register32
+# Loading work.alu_Bitslice
+# Loading work.One_Bit_FullAdder
+# Loading work.Eight_Bit_Muxer
+# 0 ns
+# 473 ns
+exit -sim
+do registerFile.do
+# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
+# Start time: 16:15:55 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# ** Error: registerFile.v(211): (vlog-2730) Undefined variable: 'ReadData2'.
+# 
+# End time: 16:15:55 on Dec 04,2014, Elapsed time: 0:00:00
 # Errors: 1, Warnings: 0
 # ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
+# Error in macro ./registerFile.do line 1
 # c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
 #     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
-ls
-# ALU
-# alu.do
-# cpu.do
-# cpu.v
-# dataMemory
-# dataMemory.bak
-# dataMemory.v
-# datamemory.v.bak
-# instructionDecoder.v
-# instructionmemory.v
-# registerFile.v
-# signextend.do
-# signextend.v
-vlib work
-vmap work work
-# Model Technology ModelSim PE vmap 10.3c Lib Mapping Utility 2014.07 Jul 19 2014
-# vmap -modelsim_quiet work work 
-# Copying c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini
-# Modifying modelsim.ini
-# ** Warning: Copied c:/Modeltech_pe_edu_10.3c/win32pe_edu/../modelsim.ini to modelsim.ini.
-#          Updated modelsim.ini.
-do dataMemory
+# "vlog -reportprogress 300 -work work registerFile.v"
+do registerFile.do
 # Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:08:45 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# -- Compiling module dataMemory
-# -- Compiling module testBenchHarness
-# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
-# ** Error: dataMemory.v(45): (vlog-2730) Undefined variable: 'begintest'.
+# Start time: 16:16:26 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# ** Error: registerFile.v(211): (vlog-2730) Undefined variable: 'ReadData2'.
 # 
-# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
-# End time: 19:09:07 on Dec 02,2014, Elapsed time: 0:00:22
-# Errors: 3, Warnings: 0
+# End time: 16:16:26 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
 # ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
+# Error in macro ./registerFile.do line 1
 # c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
 #     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
-do dataMemory
+# "vlog -reportprogress 300 -work work registerFile.v"
+do registerFile.do
 # Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:25:54 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# -- Compiling module dataMemory
-# -- Compiling module testBenchHarness
-# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
-# ** Error: dataMemory.v(46): (vlog-2730) Undefined variable: 'begintest'.
+# Start time: 16:17:00 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
 # 
-# ** Error: dataMemory.v(57): near "endmodule": syntax error, unexpected endmodule
-# End time: 19:26:16 on Dec 02,2014, Elapsed time: 0:00:22
-# Errors: 3, Warnings: 0
-# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
-# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Top level modules:
+# 	hw4testbenchharness
+# End time: 16:17:00 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:17:00 on Dec 04,2014
+# Loading work.hw4testbenchharness
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.hw4testbench
+# Loading work.register32
+# ** Error: (vish-4014) No objects found matching '/hw4testbenchharness/readregister1'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/readregister2'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/writeregister'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/clk'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/beginTest'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/endTest'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/dutPassed'.
+# Error in macro ./registerFile.do line 15
+# invalid command name "vsim_increment_error_count"
 #     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
-do dataMemory
+# "::tcl_unknown vsim_increment_error_count"
+#     ("uplevel" body line 1)
+#     invoked from within
+# "uplevel 1 ::tcl_unknown $args"
+do registerFile.do
 # Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:28:51 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# -- Compiling module dataMemory
-# -- Compiling module testBenchHarness
-# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
-# ** Error: dataMemory.v(45): (vlog-2730) Undefined variable: 'begintest'.
+# Start time: 16:18:50 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
 # 
-# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
-# End time: 19:29:13 on Dec 02,2014, Elapsed time: 0:00:22
-# Errors: 3, Warnings: 0
-# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
-# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Top level modules:
+# 	hw4testbenchharness
+# End time: 16:18:50 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:18:53 on Dec 04,2014
+# Loading work.hw4testbenchharness
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.hw4testbench
+# Loading work.register32
+# ** Error: (vish-4014) No objects found matching '/hw4testbenchharness/clk'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/beginTest'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/endTest'.
+# (vish-4014) No objects found matching '/hw4testbenchharness/dutPassed'.
+# Error in macro ./registerFile.do line 15
+# invalid command name "vsim_increment_error_count"
 #     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
-do dataMemory
+# "::tcl_unknown vsim_increment_error_count"
+#     ("uplevel" body line 1)
+#     invoked from within
+# "uplevel 1 ::tcl_unknown $args"
+do registerFile.do
 # Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:29:31 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# -- Compiling module dataMemory
-# -- Compiling module testBenchHarness
-# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
-# ** Error: dataMemory.v(56): near "endmodule": syntax error, unexpected endmodule
-# End time: 19:29:31 on Dec 02,2014, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
-# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
-# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
+# Start time: 16:19:59 on Dec 04,2014
+# vlog -reportprogress 300 -work work registerFile.v 
+# -- Compiling module register32
+# -- Compiling module register32zero
+# -- Compiling module mux32to1by32
+# -- Compiling module decoder1to32
+# -- Compiling module registerFile
+# -- Compiling module hw4testbenchharness
+# -- Compiling module hw4testbench
+# 
+# Top level modules:
+# 	hw4testbenchharness
+# End time: 16:19:59 on Dec 04,2014, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:20:01 on Dec 04,2014
+# Loading work.hw4testbenchharness
+# Loading work.registerFile
+# Loading work.register32zero
+# Loading work.decoder1to32
+# Loading work.mux32to1by32
+# Loading work.hw4testbench
+# Loading work.register32
+# ** Error: (vish-4014) No objects found matching '/hw4testbenchharness/clk'.
+# Error in macro ./registerFile.do line 15
+# invalid command name "vsim_increment_error_count"
 #     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
-do dataMemory
-# Model Technology ModelSim PE Student Edition vlog 10.3c Compiler 2014.07 Jul 19 2014
-# Start time: 19:30:13 on Dec 02,2014
-# vlog -reportprogress 300 -work work dataMemory.v 
-# -- Compiling module dataMemory
-# -- Compiling module testBenchHarness
-# ** Error: dataMemory.v(28): near "end": syntax error, unexpected end
-# ** Error: dataMemory.v(57): near "endmodule": syntax error, unexpected endmodule
-# End time: 19:30:35 on Dec 02,2014, Elapsed time: 0:00:22
-# Errors: 2, Warnings: 0
-# ** Error: c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-# Error in macro ./dataMemory line 1
-# c:/Modeltech_pe_edu_10.3c/win32pe_edu/vlog failed.
-#     while executing
-# "vlog -reportprogress 300 -work work dataMemory.v"
+# "::tcl_unknown vsim_increment_error_count"
+#     ("uplevel" body line 1)
+#     invoked from within
+# "uplevel 1 ::tcl_unknown $args"

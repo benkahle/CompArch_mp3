@@ -8,5 +8,5 @@ sim:/aluTestBench/result \
 sim:/aluTestBench/carryout \
 sim:/aluTestBench/zero \
 sim:/aluTestBench/overflow
-run -all
+run 450
 wave zoom full
