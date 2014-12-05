@@ -8,14 +8,14 @@ output[31:0] extended;
 reg[31:0] extended;
 wire[15:0] extend;
 
-always @( posedge clk ) begin
+always @(*) begin
     if (!extSel) begin 
     //Regular sign extension
-        extended[31:0] <= { {16{extend[15]}}, extend[15:0] };
+        extended[31:0] = { {16{extend[15]}}, extend[15:0] };
     end
-    if (extSel) begin
+    else begin
     //If extSel is high, do an unsigned extension (all 0's)
-        extended[31:0] <= { {16{1'b0}}, extend[15:0] };
+        extended[31:0] = { {16{1'b0}}, extend[15:0] };
     end
 
 end
