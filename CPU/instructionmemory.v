@@ -3,7 +3,7 @@ module instructionMemory(clk, addr, dataOut);
   input[31:0] addr;
   output reg[31:0] dataOut;
   reg [31:0] mem[1023:0];
-  initial $readmemh("hexcode.dat", mem);
+  initial $readmemh("hexdata.dat", mem);
   always @(*) begin
     dataOut = mem[addr/4];
   end

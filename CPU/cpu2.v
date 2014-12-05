@@ -79,7 +79,7 @@ module cpu(clk);
 
     // Set ALU 2nd source to SE(imm) or Register2
     assign B = (aluSrcB) ? full_imm : ReadData2;
-    
+
     always @(*) begin
       //muxWriteBackSrc
       if (writebackSrc == 2'd0) WriteData = aluOut;
