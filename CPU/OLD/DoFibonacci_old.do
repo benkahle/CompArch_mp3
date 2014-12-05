@@ -23,11 +23,12 @@ sim:/testCpu/cpu/ReadData1 \
 sim:/testCpu/cpu/ReadData2 \
 sim:/testCpu/cpu/rf/readRegister1 \
 sim:/testCpu/cpu/rf/readRegister2 \
+sim:/testCpu/cpu/rf/Q \
 sim:/testCpu/cpu/WriteData \
 sim:/testCpu/cpu/mas/full_imm \
 sim:/testCpu/cpu/B \
 sim:/testCpu/cpu/dm/mem
 
-run 450
+run 3000
 
 wave zoom full
