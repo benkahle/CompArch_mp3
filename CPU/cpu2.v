@@ -78,14 +78,16 @@ module cpu(clk);
     assign WriteRegister = (regDst) ? rt : rd;
 
     // Set ALU 2nd source to SE(imm) or Register2
-    assign B = (aluSrcB) ? full_imm : ReadData2 ;
+    assign B = (aluSrcB) ? full_imm : ReadData2;
     
-    always @(posedge clk) begin
+    always @(*) begin
       //muxWriteBackSrc
-      if (!writebackSrc) WriteData = aluOut;
+      if (writebackSrc == 2'd0) WriteData = aluOut;
       if (writebackSrc == 2'd1) WriteData = dataMemOut;
       if (writebackSrc == 2'd2) WriteData = pcPlus4;
+    end
 
+    always @(posedge clk) begin
       //muxPCSrc
       if (pcSrc == 2'd0) pc = pcPlus4;
       if (pcSrc == 2'd1) pc = ReadData1; // register indirect jump
@@ -134,7 +136,7 @@ module testCpu;
   cpu cpu(clk);
 
   initial begin
-    clk = 0;
+    clk = 1;
   end
 
   always #5 clk = !clk; //Switch every 5 nanoseconds

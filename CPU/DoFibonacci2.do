@@ -23,9 +23,7 @@ sim:/testCpu/cpu/ReadData2 \
 sim:/testCpu/cpu/rf/readRegister1 \
 sim:/testCpu/cpu/rf/readRegister2 \
 sim:/testCpu/cpu/WriteData \
-sim:/testCpu/cpu/B \
-sim:/testCpu/cpu/im/mem \
-sim:/testCpu/cpu/dm/mem
+sim:/testCpu/cpu/B
 
 run 450
 
