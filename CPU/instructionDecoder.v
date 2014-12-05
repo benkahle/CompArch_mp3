@@ -58,14 +58,14 @@ module instructionDecoder(clk, instruction, pcSrc, regDst, regWrEn, extSel, aluS
 
       // I-Type Instructions
       6'd4: begin // beq
-        aluCommand = 3'd2;
+        aluCommand = 3'd1;
         if (aluZero) begin
           pcSrc = 2'd3; // br
         end 
       end
 
       6'd5: begin // bne
-        aluCommand = 3'd2;
+        aluCommand = 3'd1;
         if (!aluZero) begin
           pcSrc = 2'd3; // br (dependent on result of conditional?)
         end
