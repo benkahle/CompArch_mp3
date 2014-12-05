@@ -1,5 +1,5 @@
 /////////////////////////
-// Ruby
+// Ruby Spring - HW4
 // register file
 // specs:
 //	width: 32 bit
