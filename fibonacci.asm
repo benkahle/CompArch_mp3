@@ -5,15 +5,15 @@ main:
   sw $ra, 8($sp)
   sw $a0, 4($sp)
   
-  add $a0, $zero, 0 # Call fibonacci(4)
+  add $a0, $zero, 4 # Call fibonacci(4)
   jal fibonacci
-  #sw $v0, 0($sp)
+  sw $v0, 0($sp)
   
-  #add $a0, $zero, 10 # Call fibonacci(10)
-  #jal fibonacci
+  add $a0, $zero, 10 # Call fibonacci(10)
+  jal fibonacci
   
-  #lw $t0, 0($sp) # Load first return value into $t0
-  #add $v0, $t0, $v0 # Add second return value to $t0, and save in $v0 
+  lw $t0, 0($sp) # Load first return value into $t0
+  add $v0, $t0, $v0 # Add second return value to $t0, and save in $v0 
   
   lw $ra, 8($sp) # load initial state
   lw $a0, 4($sp)
